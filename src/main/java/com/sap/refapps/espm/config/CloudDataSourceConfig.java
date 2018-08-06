@@ -39,7 +39,7 @@ public class CloudDataSourceConfig /*extends AbstractCloudConfig*/  {
 
     @Bean
     public DataSource postgresDataSource() {
-        String databaseUrl = System.getenv("DATABASE_URL")
+        String databaseUrl = System.getenv("DATABASE_URL");
         log.info("Initializing PostgreSQL database: {}", databaseUrl);
 
         URI dbUri;
