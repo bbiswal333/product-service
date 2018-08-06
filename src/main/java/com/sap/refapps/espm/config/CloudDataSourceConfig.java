@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Profile;
  *
  */
 @Configuration
-@Profile("cloud")
+@Profile("local")
 public class CloudDataSourceConfig /*extends AbstractCloudConfig*/  {
 
 	/**
