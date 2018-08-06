@@ -15,7 +15,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
  *
  */
 @Configuration
-@Profile("local")
+@Profile("local1")
 @ConfigurationProperties("spring.datasource")
 public class LocalDataSourceConfig  {
 
