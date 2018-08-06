@@ -35,19 +35,15 @@ public class CloudDataSourceConfig /*extends AbstractCloudConfig*/  {
 	}*/
 	
 	
-	Logger log = LoggerFactory.getLogger(getClass());
-
     @Bean
     public DataSource postgresDataSource() {
         String databaseUrl = System.getenv("DATABASE_URL");
-        log.info("Initializing PostgreSQL database: {}", databaseUrl);
-
+       
         URI dbUri;
         try {
             dbUri = new URI(databaseUrl);
         }
         catch (URISyntaxException e) {
-            log.error(String.format("Invalid DATABASE_URL: %s", databaseUrl), e);
             return null;
         }
 
