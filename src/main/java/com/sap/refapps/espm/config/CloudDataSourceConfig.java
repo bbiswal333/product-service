@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Profile;
  */
 @Configuration
 @Profile("cloud")
-public class CloudDataSourceConfig extends AbstractCloudConfig  {
+public class CloudDataSourceConfig /*extends AbstractCloudConfig*/  {
 
 	/**
 	 * Returns the datasource based on DB service
@@ -25,9 +25,24 @@ public class CloudDataSourceConfig extends AbstractCloudConfig  {
 	 * 
 	 * @return datasource
 	 */
-	@Bean
+	/*@Bean
 	public DataSource cloudDataSource() {
 		return connectionFactory().dataSource();
-	}
+	}*/
+	 @Bean
+    public BasicDataSource dataSource() throws URISyntaxException {
+        URI dbUri = new URI(System.getenv("DATABASE_URL"));
+
+        String username = dbUri.getUserInfo().split(":")[0];
+        String password = dbUri.getUserInfo().split(":")[1];
+        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath() + "?sslmode=require";
+
+        BasicDataSource basicDataSource = new BasicDataSource();
+        basicDataSource.setUrl(dbUrl);
+        basicDataSource.setUsername(username);
+        basicDataSource.setPassword(password);
+
+        return basicDataSource;
+    }
 
 }
