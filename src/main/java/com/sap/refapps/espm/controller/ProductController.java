@@ -39,7 +39,6 @@ public class ProductController {
 	 * @return list of product
 	 * @throws InterruptedException 
 	 */
-	@CrossOrigin(origins = "https://product-ui.herokuapp.com/")
 	@GetMapping("/products")
 	public ResponseEntity<Iterable<Product>> getAllProducts() throws InterruptedException {
 		final Iterable<Product> products;
