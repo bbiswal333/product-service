@@ -11,8 +11,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class CorsConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
-	  registry.addMapping("/info/**")
-	   	  .allowedOrigins("https://product-ui.herokuapp.com/", "http://localhost:8787")
+	  registry.addMapping("/**")
+	   	  .allowedOrigins("*")
 		  .allowedMethods("POST", "GET",  "PUT", "OPTIONS", "DELETE")
 		  .allowCredentials(false)
 		  .maxAge(4800);
