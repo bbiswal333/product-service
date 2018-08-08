@@ -52,7 +52,7 @@ public class Application implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		if (Arrays.stream(environment.getActiveProfiles())
-				.anyMatch(env -> (env.equalsIgnoreCase("local") || env.equalsIgnoreCase("cloud")))) {
+				.anyMatch(env -> (env.equalsIgnoreCase("local") || env.equalsIgnoreCase("cloud") || env.equalsIgnoreCase("heroku")))) {
 			productService.loadProduct(PRODUCT_DATA_LOCATION);
 			productService.loadStock(STOCK_DATA_LOCATION);
 		}

@@ -18,7 +18,8 @@ public class ProductApplicationContextInitializer
 implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
 	private static final Logger logger = LoggerFactory.getLogger(ProductApplicationContextInitializer.class);
-
+	private static final String platform = System.getenv("PLATFORM");
+	
 	/* (non-Javadoc)
 	 * @see org.springframework.context.ApplicationContextInitializer#initialize(org.springframework.context.ConfigurableApplicationContext)
 	 */
@@ -28,8 +29,11 @@ implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 		Cloud cloud = getCloud();
 		if (cloud != null) {
 			applicationEnvironment.addActiveProfile("cloud");
-
-		} else {
+		}
+		else if(platform.equalsIgnoreCase("HEROKU")) {
+			applicationEnvironment.addActiveProfile("heroku");
+		}
+		else {
 			applicationEnvironment.addActiveProfile("local");
 		}
 

@@ -20,8 +20,8 @@ import org.springframework.context.annotation.Profile;
  *
  */
 @Configuration
-@Profile("local")
-public class CloudDataSourceConfig /*extends AbstractCloudConfig*/  {
+@Profile("cloud")
+public class CloudDataSourceConfig extends AbstractCloudConfig  {
 
 	/**
 	 * Returns the datasource based on DB service
@@ -29,40 +29,9 @@ public class CloudDataSourceConfig /*extends AbstractCloudConfig*/  {
 	 * 
 	 * @return datasource
 	 */
-	/*@Bean
+	@Bean
 	public DataSource cloudDataSource() {
 		return connectionFactory().dataSource();
-	}*/
+	}
 	
-	
-    @Bean
-    public DataSource postgresDataSource() {
-        String databaseUrl = System.getenv("DATABASE_URL");
-       
-        URI dbUri;
-        try {
-            dbUri = new URI(databaseUrl);
-        }
-        catch (URISyntaxException e) {
-            return null;
-        }
-
-        String username = dbUri.getUserInfo().split(":")[0];
-        String password = dbUri.getUserInfo().split(":")[1];
-        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' 
-                       + dbUri.getPort() + dbUri.getPath();
-
-        org.apache.tomcat.jdbc.pool.DataSource dataSource 
-            = new org.apache.tomcat.jdbc.pool.DataSource();
-        dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl(dbUrl);
-        dataSource.setUsername(username);
-        dataSource.setPassword(password);
-        dataSource.setTestOnBorrow(true);
-        dataSource.setTestWhileIdle(true);
-        dataSource.setTestOnReturn(true);
-        dataSource.setValidationQuery("SELECT 1");
-        return dataSource;
-    }
-
 }
