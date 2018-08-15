@@ -15,7 +15,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 @Configuration
 @Profile("heroku")
-public class DataSourceConfig {
+public class HerokuDataSourceConfig {
 	
 	@Bean
     public DataSource postgresDataSource() {
